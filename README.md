@@ -14,3 +14,29 @@ This project demonstrates a collapsed-core network architecture connecting a com
 * Port Security
 
 ## Status
+
+
+### ✅ Completed
+- Office A network architecture diagram created
+- Initial Office A topology deployed in Packet Tracer
+- Office A Device hardening baseline configured (SSH, local users, security settings)
+
+### 🟡 In Progress
+- VLAN Creation
+- Spanning Tree configuration (RPVST+)
+- Access port assignment and trunking
+
+### ⏳ Planned
+- HSRP configuration on core switches and routers
+- OSPF routing between core and routers
+- DHCP implementation (via Domain Controller + relay)
+- Wireless deployment (WLC + AP provisioning)
+
+### 🔜 Future Enhancements
+- Office B network design and deployment
+- Inter-office connectivity (simulated IPsec tunnel due to Packet Tracer constraints)
+- Management ACLs on VTY lines
+- Failover testing and validation
+
+
+
