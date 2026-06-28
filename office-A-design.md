@@ -22,7 +22,7 @@ While larger enterprises may benefit from this “Three-Tier” network architec
 
 ## Planning the "Collapsed Core Architecture"
 
-![Office A Diagram1](diagrams/OfficeA2.png)
+![Office A Diagram2](diagrams/OfficeA2.png)
 
 The above diagram represents the revised architectural design for Office A’s network. The Core Layer has been collapsed, combining the functions of the Distribution and Core layer within two Layer 3 switches. Layer 2 EtherChannel connects the two Core Switches, providing increased throughput and VLAN default gateway redundancy via HSRP. Each server, which will be described in more depth later, is connected to an Access Switch via LACP, providing the redundancy and throughput required for network resources. Each Access Switch is now dual-homed to each Collapsed Core switch, leveraging Spanning Tree for loop prevention and redundancy. This design significantly improves on the complexity of the previous architecture, while still focusing on high availability.
 
