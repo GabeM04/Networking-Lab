@@ -42,3 +42,11 @@ transport input ssh
 * The **second** set of commands sets Secrets for both entering "Privileged Exec" mode and for logging into the "labadmin" user, which has Privilege 15 (Highest permissions). It also stores all clear-text passwords as Type 7 using the "service password-encryption" command. Type 7 encryption is not strong but it is used to prevent clear-text passwords being shown in the running config.
 * The **third** set of commands enables local logins on the console line and sets a 10-minute timeout for the console. Since it is extremely rare for the console to be exploited by a malicious actor as they would need physical access to the device, a longer exec-timeout is fine.
 * Finally, the **fourth** set of commands configures the terminal lines. It enables local logins, sets a shorter 5-minute timeout, and forces SSH to be used. This is best practice as Telnet is unencrypted and a vulnerability.
+
+* In the future, an ACL will be applied to the vty lines.
+
+Next Steps:
+* Set up CSW-A1 as a VTP server and configure VLANs.
+* Enable Spanning Tree RPVST+.
+* Configure Access Ports on the Access Switches alongside setting the appropriate VLANs.
+  
