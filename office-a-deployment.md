@@ -46,7 +46,7 @@ transport input ssh
 * In the future, an ACL will be applied to the vty lines.
 
 Next Steps:
-* Set up CSW-A1 as a VTP server and configure VLANs.
-* Enable Spanning Tree RPVST+.
-* Configure Access Ports on the Access Switches alongside setting the appropriate VLANs.
+* Configure VLANs on all switches.
+* Ensure Rapid-PVST+ is enabled and Spanning Tree is configured correctly. Manipulate Root Bridges and enable PortFast/BPDU Guard.
+* Configure Access Switches with downstream Access Ports and upstream Trunk Ports. Apply appropriate VLANs to ports.
   
