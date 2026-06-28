@@ -15,3 +15,8 @@ Variable Length Subnet Masking (VLSM) was used to appropriately size the subnets
 ## Initial Network Planning
 
 ![Office A Diagram1](diagrams/office-A-design.png)
+
+The diagram above shows my initial topology for Office A. My primary goal is creating redundancy while maximizing throughput. Each Access Switch trunks to each Distribution Switch, which then trunks to each Core Switch. The Core Switches would then perform inter-VLAN routing and HSRP for redundancy. While designing this architecture, I noticed the Distribution Switches added increased Spanning Tree and routing complexity while performing no beneficial role in the network. With the Core Switches handling inter-VLAN routing and HSRP, the Distribution Switches are only acting as a relay with no Layer 3 or policy functionality in this design. This results in all Layer 3 networking being done at the Core Layer, leaving the Distribution Layer underutilized.
+
+While larger enterprises may benefit from this “Three-Tier” network architecture design, the offices being simulated in this lab would better benefit from a “Collapsed Core” design. In this design, the Distribution and Core Layers are collapsed into one “Collapsed Core”, reducing complexity. After evaluating the needs of each office which serve no more than 100 users each, I made the architectural decision to convert to a “Collapsed Core” design.
+
