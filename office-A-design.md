@@ -14,4 +14,4 @@ Variable Length Subnet Masking (VLSM) was used to appropriately size the subnets
 
 ## Initial Network Planning
 
-![Office A Diagram1](diagrams/office-A-design.pgn)
+![Office A Diagram1](diagrams/office-A-design.png)
