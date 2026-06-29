@@ -20,9 +20,9 @@ This project demonstrates a collapsed-core network architecture connecting a com
 - Office A network architecture diagram created [View Diagram](office-a-design.md)
 - Initial Office A topology deployed in Packet Tracer [View Deployment](office-a-deployment.md)
 - Office A Device hardening baseline configured (SSH, local users, security settings)
+- VLAN Creation
 
 ### 🟡 In Progress
-- VLAN Creation
 - Spanning Tree configuration (RPVST+)
 - Access port assignment and trunking
 
