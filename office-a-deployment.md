@@ -49,4 +49,32 @@ Next Steps:
 * Configure VLANs on all switches.
 * Ensure Rapid-PVST+ is enabled and Spanning Tree is configured correctly. Manipulate Root Bridges and enable PortFast/BPDU Guard.
 * Configure Access Switches with downstream Access Ports and upstream Trunk Ports. Apply appropriate VLANs to ports.
+
+## VLAN and Spanning Tree Configuration
+
+The initial step in this section is creating the appropriate VLANs on each switch. While a VTP Server can be used to propagate the VLANs to each VTP Client switch, after doing further research I came to the conclusion that using VTP is not best practice. VTP Servers can create a single point of failure, causing a configuration issue on the VTP Server to affect every client. Furthermore, if a new switch were to be introduced and take over as VTP Root, it could permanently wipe out the VLAN database of every other switch. While this lab is a small simulation and such an issue occurring would cause minimal downtime, I decided to follow best practice for larger enterprise networks. In a larger more sophisticated network, a configuration pushing tool such as Ansible would be used but due to Packet Tracer limitations and Ansible falling outside of the scope of this lab, I decided to simply type the commands into a notepad and paste them into each individual switch.
+```
+vlan 10
+name Users
+!
+vlan 20
+name Phones
+!
+vlan 30
+name Servers
+!
+vlan 40
+name Wi-Fi
+!
+vlan 90
+name Management
+```
+* The set of commands above create the appropriate VLANs on each device.
+
+* While working on deploying these commands, I had to log back into the switches. I noted that while logging into the "labadmin" user on the Core Switches allowed me to access Privileged Exec without a password, the Access Switches required me to input the Enable secret.
+* I further investigated this issue by running ```sh run | inc labadmin``` on CSW1 and then on ASW1.
+  * On CSW1, I got the following output: ```username labadmin privilege 15 secret 5 $1$mERr$JAbIelvRLsDmA1aIeBB3T/```
+  * On ASW1, I got the following output: ```username labadmin secret 5 $1$mERr$JAbIelvRLsDmA1aIeBB3T/```
+* On ASW1, I removed labadmin and recreated it, making sure to include "privilege 15", yet I got the same result.
+* After doing research, this seems to be another Packet Tracer limitation for the 2960-24TT switches. In a live environment, this account would have the appropriate privilege level.
   
