@@ -2,7 +2,7 @@
 
 ![OfficeA-Initial-Deployment](diagrams/OfficeA-Initial-Deployment.png)
 
-This initial deployment phase involves recreating the diagram in Packet Tracer. I decided to use Cisco 2911 Router, 3560-24PS Multilayer Switch, and 2960-24TT Switch. These devices are capable of performing all of the functions necessary in the lab, including OSPF, HSRP, and STP.
+This initial deployment phase involves recreating the diagram in Packet Tracer. I decided to use the Cisco 2911 Router, 3560-24PS Multilayer Switch, and 2960-24TT Switch. These devices are capable of performing all of the functions necessary in the lab, including OSPF, HSRP, and STP.
 
 A few things I noticed while deploying this lab in Packet Tracer:
 * The servers currently only have one NIC available. I will have to look into options for enabling LACP with dual-NIC.
