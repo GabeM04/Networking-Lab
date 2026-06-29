@@ -50,7 +50,7 @@ Next Steps:
 * Ensure Rapid-PVST+ is enabled and Spanning Tree is configured correctly. Manipulate Root Bridges and enable PortFast/BPDU Guard.
 * Configure Access Switches with downstream Access Ports and upstream Trunk Ports. Apply appropriate VLANs to ports.
 
-## VLAN and Spanning Tree Configuration
+## VLAN Configuration
 
 The initial step in this section is creating the appropriate VLANs on each switch. While a VTP Server can be used to propagate the VLANs to each VTP Client switch, after doing further research I came to the conclusion that using VTP is not best practice. VTP Servers can create a single point of failure, causing a configuration issue on the VTP Server to affect every client. Furthermore, if a new switch were to be introduced and take over as VTP Root, it could permanently wipe out the VLAN database of every other switch. While this lab is a small simulation and such an issue occurring would cause minimal downtime, I decided to follow best practice for larger enterprise networks. In a larger more sophisticated network, a configuration pushing tool such as Ansible would be used but due to Packet Tracer limitations and Ansible falling outside of the scope of this lab, I decided to simply type the commands into a notepad and paste them into each individual switch.
 ```
