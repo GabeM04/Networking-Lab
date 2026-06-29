@@ -77,4 +77,5 @@ name Management
   * On ASW1, I got the following output: ```username labadmin secret 5 $1$mERr$JAbIelvRLsDmA1aIeBB3T/```
 * On ASW1, I removed labadmin and recreated it, making sure to include "privilege 15", yet I got the same result.
 * After doing research, this seems to be another Packet Tracer limitation for the 2960-24TT switches. In a live environment, this account would have the appropriate privilege level.
+* Just to confirm this, I created a new 2960 Switch with the base config and tried running ```username labadmin privilege 15 secret Lab321```. Same result.
   
