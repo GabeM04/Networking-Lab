@@ -72,10 +72,38 @@ name Management
 * The set of commands above create the appropriate VLANs on each device.
 
 * While working on deploying these commands, I had to log back into the switches. I noted that while logging into the "labadmin" user on the Core Switches allowed me to access Privileged Exec without a password, the Access Switches required me to input the Enable secret.
-* I further investigated this issue by running ```sh run | inc labadmin``` on CSW1 and then on ASW1.
-  * On CSW1, I got the following output: ```username labadmin privilege 15 secret 5 $1$mERr$JAbIelvRLsDmA1aIeBB3T/```
-  * On ASW1, I got the following output: ```username labadmin secret 5 $1$mERr$JAbIelvRLsDmA1aIeBB3T/```
+* I further investigated this issue by running ```sh run | inc labadmin``` on CSW1-A and then on ASW1-A.
+  * On CSW1-A, I got the following output: ```username labadmin privilege 15 secret 5 $1$mERr$JAbIelvRLsDmA1aIeBB3T/```
+  * On ASW1-A, I got the following output: ```username labadmin secret 5 $1$mERr$JAbIelvRLsDmA1aIeBB3T/```
 * On ASW1, I removed labadmin and recreated it, making sure to include "privilege 15", yet I got the same result.
 * After doing research, this seems to be another Packet Tracer limitation for the 2960-24TT switches. In a live environment, this account would have the appropriate privilege level.
-* Just to confirm this, I created a new 2960 Switch with the base config and tried running ```username labadmin privilege 15 secret Lab321```. Same result.
+* Just to confirm this, I created a new 2960 Switch with the base config and tried running ```username labadmin privilege 15 secret Lab321```. Same result. I decided to chalk this to Packet Tracer simulation issues and continued on.
+
+Next Steps:
+* Ensure RPVST+ is enabled on each switch.
+* Manipulate root bridges.
+
+## Spanning Tree and Layer 2 Interface Configuration
+
+The initial step in this section is confirming each switch has RPVST+ enabled. Usually PVST is enabled by default, which I was able to confirm with a quick ```Show Spanning-Tree Summary``` command. To change this to RPVST+, I issued the ```Spanning-Tree Mode Rapid-PVST``` on each switch.
+
+Afterwards, I wanted to configure the edge ports first as they are the most susceptible to physical access vulnerability. As they are edge ports, I plan on enabling PortFast to allow immediate network access to end devices. I also plan on enabling BPDU Guard, Port Security, and DHCP Snooping for a stronger Access Layer security posture.
+
+Before the security commands, I of course had to first properly configure the edge ports as Access Ports with the appropriate VLANs. The ports connection to VOIP phones would require both VLANs 10 and 20, while the servers would require VLAN 30. As the process is quite similar for each edge port, I will provide an example of configuring the ports connecting to a VOIP phone on ASW1-A.
+```
+Interface-Range f0/2-5
+switchport mode access
+switchport access vlan 10
+switchport voice vlan 20
+switchport nonegotiate
+!
+switchport port-security
+switchport port-security maximum 2
+switchport port-security violation restrict
+!
+spanning-tree portfast
+spanning-tree bpduguard enable
+```
+* In the case of ports connecting to a VOIP phone, the port-security maximum is set to "2". This is due to both the PC and VOIP phone having their own MAC Address.
+* Furthermore, I used ```switchport nonegotiate``` to disable Dynamic Trunking Protocol (DTP). This is a security best practice to ensure the port can't be manipulated to trunk traffic it shouldn't.
   
