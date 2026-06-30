@@ -111,7 +111,7 @@ Following the WLC port configuration, I realized I kept the default VLAN "1" on 
 
 Finally, I configured the Access Switches' upstream ports to the Core Switches as trunk ports carrying all VLANs. Since these are not edge ports, there is no need for port-security, portfast, or BPDU guard. To prevent the native VLAN errors and since this section is covering all Layer 2 interfaces, I decided to also configure the Core Switch downstream trunk ports to the Access Switches. HSRP and Trunking between the Core Switches will be configured in a later section.
 
-## Spanning Tree Configuration and Layer 2 HSRP
+## Spanning Tree and VLAN Gateway HSRP Configuration
 
 The initial step in this section is confirming each switch has RPVST+ enabled. Usually PVST is enabled by default, which I was able to confirm with a quick ```Show Spanning-Tree Summary``` command. To change this to RPVST+, I issued the ```Spanning-Tree Mode Rapid-PVST``` on each switch.
 
