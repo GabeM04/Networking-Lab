@@ -80,12 +80,10 @@ name Management
 * Just to confirm this, I created a new 2960 Switch with the base config and tried running ```username labadmin privilege 15 secret Lab321```. Same result. I decided to chalk this to Packet Tracer simulation issues and continued on.
 
 Next Steps:
-* Ensure RPVST+ is enabled on each switch.
-* Manipulate root bridges.
+* Configure Access Switch edge ports
+* Configure Spanning Tree
 
-## Spanning Tree and Layer 2 Interface Configuration
-
-The initial step in this section is confirming each switch has RPVST+ enabled. Usually PVST is enabled by default, which I was able to confirm with a quick ```Show Spanning-Tree Summary``` command. To change this to RPVST+, I issued the ```Spanning-Tree Mode Rapid-PVST``` on each switch.
+## Access Switch Edge Port Configuration
 
 Afterwards, I wanted to configure the edge ports first as they are the most susceptible to physical access vulnerability. As they are edge ports, I plan on enabling PortFast to allow immediate network access to end devices. I also plan on enabling BPDU Guard, Port Security, and DHCP Snooping for a stronger Access Layer security posture.
 
@@ -105,5 +103,15 @@ spanning-tree portfast
 spanning-tree bpduguard enable
 ```
 * In the case of ports connecting to a VOIP phone, the port-security maximum is set to "2". This is due to both the PC and VOIP phone having their own MAC Address.
-* Furthermore, I used ```switchport nonegotiate``` to disable Dynamic Trunking Protocol (DTP). This is a security best practice to ensure the port can't be manipulated to trunk traffic it shouldn't.
+* Furthermore, I used ```switchport nonegotiate``` to disable Dynamic Trunking Protocol (DTP). This is a security best practice to ensure the port can't be manipulated to participate in trunk negotiation
+
+After configuring each switches edge ports, I realized I forgot to configure ASW1-A's port to the WLC. Since the wireless network is Split-MAC, all data received by the AP's will be sent through the LAN to the WLC via an encrypted CAPWAP tunnel. Therefore, I configured this port as a trunk port allowing both VLAN 40 (Wi-Fi) and VLAN 90 (Management). I also made sure to use the special command ```spanning-tree portfast trunk```, as trunk ports require extra confirmation to confirm enabling PortFast.
+
+Finally, I realized I kept the default VLAN "1" on all of the ports. This is not considered best practice as it leaves ports vulnerable to rogue switches, enabling attacks such as VLAN Hopping. I fixed this by changing the default VLAN on all switches to 300.
+
+## Spanning Tree Configuration
+
+The initial step in this section is confirming each switch has RPVST+ enabled. Usually PVST is enabled by default, which I was able to confirm with a quick ```Show Spanning-Tree Summary``` command. To change this to RPVST+, I issued the ```Spanning-Tree Mode Rapid-PVST``` on each switch.
+
+
   
