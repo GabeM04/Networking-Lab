@@ -83,7 +83,7 @@ Next Steps:
 * Configure Access Switch edge ports
 * Configure Spanning Tree
 
-## Access Switch Edge Port Configuration
+## Layer 2 Trunk and Edge Port Configurations
 
 Afterwards, I wanted to configure the edge ports first as they are the most susceptible to physical access vulnerability. As they are edge ports, I plan on enabling PortFast to allow immediate network access to end devices. I also plan on enabling BPDU Guard, Port Security, and DHCP Snooping for a stronger Access Layer security posture.
 
@@ -107,7 +107,9 @@ spanning-tree bpduguard enable
 
 After configuring each switches edge ports, I realized I forgot to configure ASW1-A's port to the WLC. Since the wireless network is Split-MAC, all data received by the AP's will be sent through the LAN to the WLC via an encrypted CAPWAP tunnel. Therefore, I configured this port as a trunk port allowing both VLAN 40 (Wi-Fi) and VLAN 90 (Management). I also made sure to use the special command ```spanning-tree portfast trunk```, as trunk ports require extra confirmation to confirm enabling PortFast.
 
-Finally, I realized I kept the default VLAN "1" on all of the ports. This is not considered best practice as it leaves ports vulnerable to rogue switches, enabling attacks such as VLAN Hopping. I fixed this by changing the default VLAN on all switches to 300.
+Following the WLC port configuration, I realized I kept the default VLAN "1" on all of the ports. This is not considered best practice as it leaves ports vulnerable to rogue switches, enabling attacks such as VLAN Hopping. I fixed this by changing the default VLAN on all switches to 300.
+
+Finally, I configured the Access Switches' upstream ports to the Core Switches as trunk ports carrying all VLANs. Since these are not edge ports, there is no need for port-security, portfast, or BPDU guard. To prevent the native VLAN errors and since this section is covering all Layer 2 interfaces, I decided to also configure the Core Switch downstream trunk ports to the Access Switches. HSRP and Trunking between the Core Switches will be configured in a later section.
 
 ## Spanning Tree Configuration
 
