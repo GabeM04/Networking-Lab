@@ -21,10 +21,10 @@ This project demonstrates a collapsed-core network architecture connecting a com
 - Initial Office A topology deployed in Packet Tracer [View Deployment](office-a-deployment.md)
 - Office A Device hardening baseline configured (SSH, local users, security settings)
 - VLAN Creation
+- Access port assignment and trunking
 
 ### 🟡 In Progress
-- Spanning Tree configuration (RPVST+)
-- Access port assignment and trunking
+- Spanning Tree configuration and Layer 2 HSRP
 
 ### ⏳ Planned
 - HSRP configuration on core switches and routers
