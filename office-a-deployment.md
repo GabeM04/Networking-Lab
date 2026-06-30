@@ -129,11 +129,12 @@ switchport trunk native vlan 300
 * The above commands configure ports g1/0/10 and g1/0/11, which are each switch's ports connecting to the neighbor core switch, for the PaGP EtherChannel Protocol. It then creates a Port-Channel interface and configures this new interface as a trunk.
 * EtherChannel is extremely useful in Spanning Tree environments, as it allows redundant ports to operate as backups while still allowing maximum throughput.
 
-Afterwards, I needed to configure HSRP between the two switches. HSRP will allow each switch to be the default gateway for certain VLANs while acting as the backup gateway for other VLANs. This allows resilience and load-balancing on all VLAN traffic. Since there are 5 VLANs, one switch will need to be the default gateway for three. I decided to make this switch CSW1-A, as its downstream switch AWS1-A is directly connected to the WLC which will very often be using the "Management" VLAN 90.
+Afterwards, I needed to configure HSRP between the two switches. HSRP will allow each switch to be the default gateway for certain VLANs while acting as the backup gateway for other VLANs. This allows resilience and load-balancing on all VLAN traffic. Since there are 5 VLANs, one switch will need to be the default gateway for three. I decided to make this switch CSW1-A, which will take the "Management" VLAN also.
 
 The HSRP commands are quite repetitive, so the below section will simply provide an example of setting CSW1-A as the "Active" router for VLAN 90 and CSW2-A as the "Standby" router.
 ```
 // CSW1-A
+ip routing // Enables Layer 3 Routing
 interface vlan 90
 ip address 10.1.90.2 255.255.255.224
 !
@@ -142,6 +143,7 @@ standby 1 priority 105
 standby 1 preempt
 !
 // CSW2-A
+ip routing
 interface vlan 90
 ip addr 10.1.90.3 255.255.255.224
 !
@@ -149,6 +151,24 @@ standby 1 ip 10.1.90.1
 ```
 
 * The ```priority``` and ```preempt``` commands on CSW1-A are used to manipulate the "Active" router, ensuring CSW1-A is selected as the Active and returns to its role after any HSRP refreshes.
+
+Of course, Spanning Tree Root Selection must align with HSRP Default Routers to create an efficient traffic flow. To do this, I configured each Core Switch to be the Spanning Tree Root for each VLAN they're the Active Router for. For VLANs they are the Standby Router for, I configured them to operate as a Spanning Tree Root Secondary. Below is an example of the commands being performed for VLAN 90.
+```
+// CSW1-A
+spanning-tree vlan 90 root primary
+!
+// CSW2-A
+spanning-tree vlan 90 root secondary
+```
+
+
+| VLAN | STP Root (Primary) | STP Secondary | HSRP Active | HSRP Standby |
+|------|-------------------|---------------|-------------|--------------|
+| 10   | CSW1-A            | CSW2-A        | CSW1-A      | CSW2-A       |
+| 20   | CSW1-A            | CSW2-A        | CSW1-A      | CSW2-A       |
+| 30   | CSW2-A            | CSW1-A        | CSW2-A      | CSW1-A       |
+| 40   | CSW2-A            | CSW1-A        | CSW2-A      | CSW1-A       |
+| 90   | CSW1-A            | CSW2-A        | CSW1-A      | CSW2-A       
 
 
 
