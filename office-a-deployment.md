@@ -168,7 +168,16 @@ spanning-tree vlan 90 root secondary
 | 20   | CSW1-A            | CSW2-A        | CSW1-A      | CSW2-A       |
 | 30   | CSW2-A            | CSW1-A        | CSW2-A      | CSW1-A       |
 | 40   | CSW2-A            | CSW1-A        | CSW2-A      | CSW1-A       |
-| 90   | CSW1-A            | CSW2-A        | CSW1-A      | CSW2-A       
+| 90   | CSW1-A            | CSW2-A        | CSW1-A      | CSW2-A       |
+
+* Confirmed HSRP alignment using ```show standby brief```
+<img width="547" height="150" alt="image" src="https://github.com/user-attachments/assets/e1d36116-bd17-4cdc-89b5-e89006566f07" />
+<img width="534" height="141" alt="image" src="https://github.com/user-attachments/assets/3d589818-62c1-496b-89ef-7e93c844b9af" />
+
+
+
+
+
 
 
 
