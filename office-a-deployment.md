@@ -177,13 +177,24 @@ spanning-tree vlan 90 root secondary
 * After doing more research, I realized that while configuring HSRP groups in a generic "1,2,3,4" pattern is fine for a lab environment, it's actually best practice to configure each HSRP group to match it's VLAN. So for example, "Standby 90" will be for VLAN 90. I reflected this best practice in the lab by reconfiguring each HSRP group to match its VLAN. Below is the new results of ```show standby brief``` on CSW1-A.
 <img width="537" height="137" alt="image" src="https://github.com/user-attachments/assets/3bdacf06-d9b3-4132-899c-0fc8cdd1df39" />
 
-## Layer 3 Configuration
+## Layer 3 Interface Configuration
 
 Finally, continuing our upstream progress, we reach Layer 3. Beginning my Layer 3 configuration, I realized a flaw in my initial network topology diagram. My Layer 3 point-to-point links were configuring to be inside the 10.1.90.0/24 network, which also includes the 10.1.90.0/27 Management VLAN. While I could use the rest of the block after .31 for infrastructure, this causes confusion between subnet roles. I decided to instead make the architectural decision to move all infrastructure to the 10.1.100.0/24 block, creating a clear line between Layer 3 ports and Layer 2 broadcast domains.
 
 After making this change, I began configuring the IPs on the port connections between each device. Since these commands are trivial, I will simply show the result of ```show ip interface brief``` on R1-A. I also made sure to run ```no switchport``` on the Core Switch Layer 3 ports to ensure they function at Layer 3 and not Layer 2.
 
 <img width="577" height="89" alt="image" src="https://github.com/user-attachments/assets/81690bf9-ebdb-4a28-b4b3-09e02f878fe8" />
+
+* After configuring the interfaces, I realized it would be a good idea to add a description to each link to describe its connected device.
+* Added these descriptions to each Layer 3 interface.
+* I also verified Layer 3 connectivity by running several ping tests between switches and routers, confirming ICMP Echos.
+
+## OSPF Configuration
+
+
+
+
+
 
 
 
