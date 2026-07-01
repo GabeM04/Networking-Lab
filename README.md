@@ -22,12 +22,13 @@ This project demonstrates a collapsed-core network architecture connecting a com
 - Office A Device hardening baseline configured (SSH, local users, security settings)
 - VLAN Creation
 - Access port assignment and trunking
-
-### 🟡 In Progress
 - Spanning Tree configuration and Layer 2 HSRP
 
+### 🟡 In Progress
+- HSRP configuration on Core Switches
+
 ### ⏳ Planned
-- HSRP configuration on core switches and routers
+
 - OSPF routing between core and routers
 - DHCP implementation (via Domain Controller + relay)
 - Wireless deployment (WLC + AP provisioning)
