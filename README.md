@@ -25,8 +25,9 @@ This project demonstrates a collapsed-core network architecture connecting a com
 - Spanning Tree configuration and Layer 2 HSRP
 
 ### 🟡 In Progress
-- HSRP configuration on Core Switches
 
+- OSPF routing between core and routers
+  
 ### ⏳ Planned
 
 - OSPF routing between core and routers
