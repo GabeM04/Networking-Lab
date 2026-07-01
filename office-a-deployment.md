@@ -189,7 +189,11 @@ After making this change, I began configuring the IPs on the port connections be
 * Added these descriptions to each Layer 3 interface.
 * I also verified Layer 3 connectivity by running several ping tests between switches and routers, confirming ICMP Echos.
 
-Before wrapping up the Layer 3 Interface configuration, I realized it would be best practiced to create Loopback Addresses on each Layer 3 Network Device. This allows for OSPF routes to reach a network device regardless of the state of its physical interfaces, as long as one link is capable of reaching it. Loopback Addresses are also used in OSPF Router ID calculation, though in this lab Router IDs will be configured manually. The commands are quite simple, but the chart below shows the Loopback IPs set on each Layer 3 device.
+Before wrapping up the Layer 3 Interface configuration, I realized it would be best practiced to create Loopback Addresses on each Layer 3 Network Device. This allows for OSPF routes to reach a network device regardless of the state of its physical interfaces, as long as one link is capable of reaching it. Loopback Addresses are also used in OSPF Router ID calculation, though in this lab Router IDs will be configured manually. The commands are quite simple, so I will simply show an example of the commands run on R1-A. Below the commands, a table with each Loopback IP will be displayed.
+```
+interface loopback0
+ip address 1.1.1.1 255.255.255.255
+```
 
 | Device | Loopback IP|
 | -------|------------|
@@ -199,6 +203,44 @@ Before wrapping up the Layer 3 Interface configuration, I realized it would be b
 | CSW2-A | 4.4.4.4    |
 
 ## OSPF Configuration
+
+The first step in OSPF Configuration is configuring Router IDs for each network device. While the Loopback Addresses set on each device would allow for optimal DR and BDR selection, it is best practice to manually configure Router IDs. This ensures new loopbacks added in the future do not interrupt OSPF. To ensure consistency and allow for easy management, I manually configured each Router ID to match the loopback0 IP address of each network device. Below is an example of the commands ran on R1-A.
+```
+router ospf 1
+router-id 1.1.1.1
+```
+
+I then configured Passive Interfaces to be the default on each network device, while manually removing the Passive Interface state on the links between Layer 3 devices. This prevents OSPF information being sent down into the Access Layer, which is unnecessary. It also increases network security by allowing adjacencies to form only where desired. The commands below show this being executed on R1-A.
+```
+router ospf 1
+passive-interface default
+!
+interface range g0/0-2
+no passive-interface g0/0
+no passive interface g0/1
+no passive-interface g0/2
+```
+
+Since the entire Office falls within the 10.1.0.0/16 network and all VLANs should have routes to each other, I decided to advertise the 10.1.0.0/16 network on all OSPF instances. More granular access controls restricting certain devices or networks can be done with the implementation of ACLs further into the deployment. Below is an example of 10.1.0.0/16 being advertised on R1-A.
+```
+router ospf 1
+network 10.1.0.0 0.0.255.255
+```
+I also realized that since these are all point-to-point links between the Layer 3 devices, it would be best to enable ospf point-to-point. This allows for much faster convergence as OSPF will only expect a response from one other device. This command has to be done in Interface Config, per interface. Below is an example of making the link between R1-A and the other Layer 3 network devices an ospf point-to-point network.
+```
+// R1-A
+interface g0/0-2
+ip ospf network point-to-point
+```
+After making these OSPF changes, I wanted to verify that FULL adjacencies formed between network device running OSPF. To do so, I ran the following command both on R1-A and CSW2-A.
+```
+show ip ospf neighbors
+```
+Below are the results of each command.
+<img width="619" height="110" alt="image" src="https://github.com/user-attachments/assets/2a7fef1b-6118-4869-a76b-2836a3b79067" />
+<img width="620" height="95" alt="image" src="https://github.com/user-attachments/assets/6c636d13-c85e-4b5e-b46c-0cb64aaf5bf5" />
+
+
 
 
 
