@@ -237,6 +237,7 @@ After making these OSPF changes, I wanted to verify that FULL adjacencies formed
 show ip ospf neighbors
 ```
 Below are the results of each command.
+
 <img width="619" height="110" alt="image" src="https://github.com/user-attachments/assets/2a7fef1b-6118-4869-a76b-2836a3b79067" />
 <img width="620" height="95" alt="image" src="https://github.com/user-attachments/assets/6c636d13-c85e-4b5e-b46c-0cb64aaf5bf5" />
 
