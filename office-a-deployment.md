@@ -181,7 +181,7 @@ spanning-tree vlan 90 root secondary
 
 Finally, continuing our upstream progress, we reach Layer 3. Beginning my Layer 3 configuration, I realized a flaw in my initial network topology diagram. My Layer 3 point-to-point links were configuring to be inside the 10.1.90.0/24 network, which also includes the 10.1.90.0/27 Management VLAN. While I could use the rest of the block after .31 for infrastructure, this causes confusion between subnet roles. I decided to instead make the architectural decision to move all infrastructure to the 10.1.100.0/24 block, creating a clear line between Layer 3 ports and Layer 2 broadcast domains.
 
-After making this change, I began configuring the IPs on the port connections between each device. Since these commands are trivial, I will simply show the result of ```show ip interface brief``` on R1-A. I also made sure to run ```no switchport``` on the Core Switch Layer 3 ports to ensure they function at Layer 3 and not Layer 2.
+After making this change, I began configuring the IPs on the port connections between each device. Since these commands are basic, I will simply show the result of ```show ip interface brief``` on R1-A. I also made sure to run ```no switchport``` on the Core Switch Layer 3 ports to ensure they function at Layer 3 and not Layer 2.
 
 <img width="577" height="89" alt="image" src="https://github.com/user-attachments/assets/81690bf9-ebdb-4a28-b4b3-09e02f878fe8" />
 
