@@ -30,7 +30,6 @@ This project demonstrates a collapsed-core network architecture connecting a com
   
 ### ⏳ Planned
 
-- OSPF routing between core and routers
 - DHCP implementation (via Domain Controller + relay)
 - Wireless deployment (WLC + AP provisioning)
 - Management ACLs on VTY lines
