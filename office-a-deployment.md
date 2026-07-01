@@ -215,7 +215,6 @@ I then configured Passive Interfaces to be the default on each network device, w
 router ospf 1
 passive-interface default
 !
-interface range g0/0-2
 no passive-interface g0/0
 no passive interface g0/1
 no passive-interface g0/2
@@ -240,6 +239,11 @@ Below are the results of each command.
 
 <img width="619" height="110" alt="image" src="https://github.com/user-attachments/assets/2a7fef1b-6118-4869-a76b-2836a3b79067" />
 <img width="620" height="95" alt="image" src="https://github.com/user-attachments/assets/6c636d13-c85e-4b5e-b46c-0cb64aaf5bf5" />
+
+Finally, to confirm dynamic routing was working, I ran the command ```sh ip route``` on R1-A and confirmed it had a route to each VLAN via OSPF. Below is the result of the command.
+
+<img width="582" height="470" alt="image" src="https://github.com/user-attachments/assets/ca15a6be-ad71-4c44-8018-a4022fad6819" />
+
 
 
 
