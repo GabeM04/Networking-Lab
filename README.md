@@ -32,12 +32,12 @@ This project demonstrates a collapsed-core network architecture connecting a com
 - OSPF routing between core and routers
 - DHCP implementation (via Domain Controller + relay)
 - Wireless deployment (WLC + AP provisioning)
+- Management ACLs on VTY lines
+- Failover testing and validation
 
 ### 🔜 Future Enhancements
 - Office B network design and deployment
 - Inter-office connectivity (simulated IPsec tunnel due to Packet Tracer constraints)
-- Management ACLs on VTY lines
-- Failover testing and validation
 
 
 
