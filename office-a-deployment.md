@@ -189,6 +189,15 @@ After making this change, I began configuring the IPs on the port connections be
 * Added these descriptions to each Layer 3 interface.
 * I also verified Layer 3 connectivity by running several ping tests between switches and routers, confirming ICMP Echos.
 
+Before wrapping up the Layer 3 Interface configuration, I realized it would be best practiced to create Loopback Addresses on each Layer 3 Network Device. This allows for OSPF routes to reach a network device regardless of the state of its physical interfaces, as long as one link is capable of reaching it. Loopback Addresses are also used in OSPF Router ID calculation, though in this lab Router IDs will be configured manually. The commands are quite simple, but the chart below shows the Loopback IPs set on each Layer 3 device.
+
+| Device | Loopback IP|
+| -------|------------|
+| R1-A   | 1.1.1.1    |
+| R2-A   | 2.2.2.2    |
+| CSW1-A | 3.3.3.3    |
+| CSW2-A | 4.4.4.4    |
+
 ## OSPF Configuration
 
 
