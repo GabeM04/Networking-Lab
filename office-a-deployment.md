@@ -174,6 +174,10 @@ spanning-tree vlan 90 root secondary
 <img width="547" height="150" alt="image" src="https://github.com/user-attachments/assets/e1d36116-bd17-4cdc-89b5-e89006566f07" />
 <img width="534" height="141" alt="image" src="https://github.com/user-attachments/assets/3d589818-62c1-496b-89ef-7e93c844b9af" />
 
+* After doing more research, I realized that while configuring HSRP groups in a generic "1,2,3,4" pattern is fine for a lab environment, it's actually best practice to configure each HSRP group to match it's VLAN. So for example, "Standby 90" will be for VLAN 90. I reflected this best practice in the lab by reconfiguring each HSRP group to match its VLAN. Below is the new results of ```show standby brief``` on CSW1-A.
+<img width="537" height="137" alt="image" src="https://github.com/user-attachments/assets/3bdacf06-d9b3-4132-899c-0fc8cdd1df39" />
+
+
 
 
 
