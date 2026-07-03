@@ -111,6 +111,8 @@ Following the WLC port configuration, I realized I kept the default VLAN "1" on 
 
 Finally, I configured the Access Switches' upstream ports to the Core Switches as trunk ports carrying all VLANs. Since these are not edge ports, there is no need for port-security, portfast, or BPDU guard. To prevent the native VLAN errors and since this section is covering all Layer 2 interfaces, I decided to also configure the Core Switch downstream trunk ports to the Access Switches. HSRP and Trunking between the Core Switches will be configured in a later section.
 
+* **Note** - I noticed while working on enabling DHCP in a later section that Packet Tracer seems to poorly simulate MAC Address learning on ports with both a VOIP phone and PC connected. Port-Security Violations would occur despite the port only having two Mac-Addresses. Configuring these ports with ```switchport port-security maximum 3``` resolved the issue.
+
 ## Spanning Tree and VLAN Gateway HSRP Configuration
 
 The initial step in this section is confirming each switch has RPVST+ enabled. Usually PVST is enabled by default, which I was able to confirm with a quick ```Show Spanning-Tree Summary``` command. To change this to RPVST+, I issued the ```Spanning-Tree Mode Rapid-PVST``` on each switch.
@@ -251,14 +253,30 @@ I realized I did not advertise the loopback addresses in OSPF, so I went back on
 
 ## DHCP Implementation
 
-To make sure our end devices are able to dynamically acquire IP addresses, we now want to configure DHCP via the server connected to ASW1-A, which is SRV-DC, the Domain Controller. First, I set up SRV-DC by giving it an IP address (10.10.30.1) and making its default gateway 10.10.30.1, the VLAN default gateway. I then created the following DHCP pools on SRV-DC.
+To make sure our end devices are able to dynamically acquire IP addresses, we now want to configure DHCP via the server connected to ASW1-A, which is SRV-DC, the Domain Controller. First, I set up SRV-DC by giving it an IP address (10.10.30.4) and making its default gateway 10.10.30.1, the VLAN HSRP default gateway. I then created the following DHCP pools on SRV-DC.
 
-<img width="1017" height="137" alt="image" src="https://github.com/user-attachments/assets/ab8f1091-bd51-46fc-90d3-3512355cc751" />
+<img width="1086" height="267" alt="image" src="https://github.com/user-attachments/assets/c131502e-b0a8-468d-bf01-d48cd4b79ba2" />
+
 
 
 * For the **PCs** and the **Wi-Fi** DHCP pools, I decided to start them at 10.10.x.11. This allows room for any printers or workstations that require manually configured static IP addresses.
+* The **Phones** DHCP Pool does not need reserved IP addresses, as there is no need for statically configured VOIP phones.
 * The **DNS Server** is set to SRV-DC, as it will also be running DNS for the domain.
 
+Now that DHCP is configured, we need to make sure DHCP Requests from end devices are routed properly. DHCP is Layer 2 Broadcast traffic which is not forwarded by default. To fix this, we use the ```ip helpder-address``` command on the Core Switches to make the switches forward DHCP Requests to the specified IP address. The below commands give an example of DHCP Relay being configured on ASW1-A. Note that this command is only executed on VLANs 10, 20, and 40, as they are the only VLANs participating in DHCP. VLANs 30 and 90 will consist only of statically configured infrastructure.
+```
+interface vlan 10
+ip helper-address 10.1.30.4
+!
+interface vlan 20
+ip helper-address 10.1.30.4
+!
+interface vlan 40
+ip helper-address 10.1.30.4
+```
+I tested DHCP by changing PC3's IP Configuration from "Static" to "DHCP". The PC unfortunately did not seem to get an IP address. To troubleshoot this, I had a look at the configuration of the DHCP server. I realized that, unlike in the corrected screenshot I've now placed above, I accidentally made each DHCP Pool 10.10.x.x instead of 10.1.x.x. The server was also configured as 10.10.30.4 instead of 10.1.30.4. This shows how a seemingly harmless mistake can cause essential network functions to stop running. In a real enterprise environment, these types of changes would be meticulously documented and most likely pushed via automation to allow a standardized configuration, minimizing user-error. In a simulated environment like this, Network Engineers must remain resilient and make sure to double-check all configuration changes.
+
+After fixing the above error, I confirmed each PC and VOIP phone were able to get an IP address in the appropriate VLAN.
 
 
 
