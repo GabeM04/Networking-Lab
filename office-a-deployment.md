@@ -292,7 +292,7 @@ After creating connectivity to the WLC from SRV-DC, I ran into issues reaching t
 
 <img width="300" height="250" alt="image" src="https://github.com/user-attachments/assets/bf5138e0-cba1-4bc3-80aa-958aac6f30e8" />
 
-During testing, Packet Tracer exhibited extremely unstable behavior with Wireless Network Devices connected to the LAN. Broadcast storms and HSRP issues would occur, despite several hours of troubleshooting and mimicking known working configs. Considering this section has already explained the Wireless Deployment process, I decided to move onto the next section.
+During testing, Packet Tracer exhibited unstable behavior when adding Wireless Network Devices to the LAN, including broadcasts storms and HSRP Active/Standby election instability. Despite spending significant time troubleshooting and mimicking known working configurations, the issues seemed to ultimately stem from Packet Tracer limitations. Based off of this conclusion, I decided to skip further troubleshooting and work on the next section.
 
 
 
