@@ -253,7 +253,7 @@ I realized I did not advertise the loopback addresses in OSPF, so I went back on
 
 ## DHCP Implementation
 
-To make sure our end devices are able to dynamically acquire IP addresses, we now want to configure DHCP via the server connected to ASW1-A, which is SRV-DC, the Domain Controller. First, I set up SRV-DC by giving it an IP address (10.1.30.4) and making its default gateway 10.10.30.1, the VLAN HSRP default gateway. I then created the following DHCP pools on SRV-DC.
+To make sure our end devices are able to dynamically acquire IP addresses, we now want to configure DHCP via the server connected to ASW1-A, which is SRV-DC, the Domain Controller. First, I set up SRV-DC by giving it an IP address (10.1.30.4) and making its default gateway 10.1.30.1, the VLAN HSRP default gateway. I then created the following DHCP pools on SRV-DC.
 
 <img width="1086" height="267" alt="image" src="https://github.com/user-attachments/assets/c131502e-b0a8-468d-bf01-d48cd4b79ba2" />
 
