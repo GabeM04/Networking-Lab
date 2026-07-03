@@ -23,14 +23,14 @@ This project demonstrates a collapsed-core network architecture connecting a com
 - VLAN Creation
 - Access port assignment and trunking
 - Spanning Tree configuration and Layer 2 HSRP
+- OSPF routing between core and routers
 
 ### 🟡 In Progress
 
-- OSPF routing between core and routers
+- DHCP implementation (via Domain Controller + Relay)
   
 ### ⏳ Planned
 
-- DHCP implementation (via Domain Controller + relay)
 - Wireless deployment (WLC + AP provisioning)
 - Management ACLs on VTY lines
 - Failover testing and validation
