@@ -290,11 +290,11 @@ I accessed ASW1-A and confirmed the F0/1 port connected to the WLC is configured
 
 <img width="385" height="93" alt="image" src="https://github.com/user-attachments/assets/e8acc1cc-eb3a-44db-afd4-6c45945cc1e3" />
 
-After fixing the DHCP WLC Option 43, I then ran into difficulty properly configuring the WLC. It seems like it is a well known Packet Tracer quirk that devices are not able to reach the WLC via HTTP/S. I was able to resolve this issue after several restarts by creating an ad-hoc network between a laptop and the WLC, which allowed me to perform the initial configuration of the WLC. I then reconnected the WLC back into ASW1-A and confirmed I was able to login to the WLC from SRV-DC. After gaining access from SRV-DC, I created a new virtual interface on VLAN 40, **Lab Wireless**, which will be tied to the SSID. The interface is configured on **10.1.40.4** and points its DHCP to 10.1.30.4 (SRV-DC). I then configured the SSID **Lab Wireless**, which is tied to the **Lab Wireless** interface and uses WPA2-Personal with PSK. Finally, I confirmed both APs showed up under the **Access Points** tab in the GUI.
+After creating connectivity to the WLC from SRV-DC, I ran into issues reaching the Web GUI of the WLC from SRV-DC. This was ultimately resolved by initially creating an ad-hoc network between a laptop and the WLC, doing the initial setup, and then connecting the WLC back to the LAN. Afterwards, SRV-DC could reach the WLC and I was able to configure a **Virtual Interface** and **SSID**.
 
-<img width="400" height="150" alt="image" src="https://github.com/user-attachments/assets/3b487b22-819b-45e3-97fd-45fec0f88768" />
+<img width="300" height="250" alt="image" src="https://github.com/user-attachments/assets/3b487b22-819b-45e3-97fd-45fec0f88768" />
 
-<img width="400" height="150" alt="image" src="https://github.com/user-attachments/assets/bf5138e0-cba1-4bc3-80aa-958aac6f30e8" />
+<img width="300" height="250" alt="image" src="https://github.com/user-attachments/assets/bf5138e0-cba1-4bc3-80aa-958aac6f30e8" />
 
 Unfortunately, while finishing the configuration of the Office's Wi-Fi, I ran into several issues regarding broadcast storms with the WLC and LAPs connected. After doing research, it seems like Wireless deployments are very poorly simulated in Packet Tracer and prone to failure. After spending hours of troubleshooting, mimicking known working configs, and completely reconfiguring ports, I decided it would be best to move onto the next section. Due to this section already going over the entire Wireless deployment and now just being dependant on Packet Tracer, any further troubleshooting would result in little educational return.
 
