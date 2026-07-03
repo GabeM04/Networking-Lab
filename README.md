@@ -25,12 +25,12 @@ This project demonstrates a collapsed-core network architecture connecting a com
 - Spanning Tree configuration and Layer 2 HSRP
 - OSPF routing between core and routers
 - DHCP implementation (via Domain Controller + Relay)
-
-### 🟡 In Progress
 - Wireless deployment (WLC + AP provisioning)
 
-### ⏳ Planned
+### 🟡 In Progress
 - Management ACLs on VTY lines
+
+### ⏳ Planned
 - Failover testing and validation
 
 ### 🔜 Future Enhancements
