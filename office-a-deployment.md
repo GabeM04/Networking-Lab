@@ -244,6 +244,14 @@ Finally, to confirm dynamic routing was working, I ran the command ```sh ip rout
 
 <img width="582" height="470" alt="image" src="https://github.com/user-attachments/assets/ca15a6be-ad71-4c44-8018-a4022fad6819" />
 
+I realized I did not advertise the loopback addresses in OSPF, so I went back on each device and advertised its loopback address. I then confirmed routes to the loopbacks correctly propagated through OSPF by checking R1-A's routing table again.
+
+
+<img width="599" height="541" alt="image" src="https://github.com/user-attachments/assets/8cc461a6-23d4-4438-b2a7-4e93f63bb27a" />
+
+
+
+
 
 
 
