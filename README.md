@@ -27,10 +27,9 @@ This project demonstrates a collapsed-core network architecture connecting a com
 - DHCP implementation (via Domain Controller + Relay)
 
 ### 🟡 In Progress
-- PAT Configuration
+- Wireless deployment (WLC + AP provisioning)
 
 ### ⏳ Planned
-- Wireless deployment (WLC + AP provisioning)
 - Management ACLs on VTY lines
 - Failover testing and validation
 
