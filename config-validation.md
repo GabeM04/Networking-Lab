@@ -25,9 +25,26 @@ After confirming this behavior, I brought CSW1-A offline via toggling the power 
 
 <img width="375" height="136" alt="image" src="https://github.com/user-attachments/assets/0090d18a-cdd4-49fa-ab0e-ddc1123e6f7f" />
 
-This confirms that HSRP is working properly and the VLANs are not being routed through a single point of failure, which drastically improves network resilience and availability.
+I then brought CSW1-A back online and confirmed that it resumed its role as the Active Router for VLAN 10, due to the **preempt** setting being enabled. This confirms that HSRP is working properly and the VLANs are not being routed through a single point of failure, which drastically improves network resilience and availability.
 
-## Config Validation (3 - BPDU Guard)
+## Config Validation (3 - Spanning Tree)
+
+Spanning Tree validation operates very similarly to HSRP validation. First, I connected to ASW1-A and confirmed CSW1-A is the Root Bridge for VLAN 10 by using ```show spanning-tree vlan 10```.
+
+<img width="554" height="278" alt="image" src="https://github.com/user-attachments/assets/c943d289-811c-4678-bf75-e7790e382c1c" />
+
+* As shown in the image, G0/2, which is the Secondary, is currently an **Alternate Port**.
+
+Similar to the HSRP Failover validation, I then brought CSW1-A down by disconnecting its power. I ran the command ```show spanning-tree vlan 10``` again and confirmed interface G0/2 (CSW2-A Link) is now a **Root Port**.
+
+<img width="554" height="284" alt="image" src="https://github.com/user-attachments/assets/1e90a3c2-867f-4391-bf3d-7db2449c522d" />
+
+Bringing CSW1-A back up also confirms that it resumes its role as Root Bridge for VLAN 10 once Spanning Tree reconverges.
+
+<img width="706" height="383" alt="image" src="https://github.com/user-attachments/assets/7648b2d4-9b7a-4ec5-8438-c9093d7264f9" />
+
+
+## Config Validation (4 - BPDU Guard)
 
 After confirming HSRP functionality, I wanted to continue ensuring proper security measures. I decided to test BPDU Guard by disconnecting PC4 from ASW2-A's F0/1 port and instead connecting a Rogue Switch.
 
