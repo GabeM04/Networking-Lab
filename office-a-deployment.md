@@ -294,7 +294,27 @@ After creating connectivity to the WLC from SRV-DC, I ran into issues reaching t
 
 During testing, Packet Tracer exhibited unstable behavior when adding Wireless Network Devices to the LAN, including broadcasts storms and HSRP Active/Standby election instability. Despite spending significant time troubleshooting and mimicking known working configurations, the issues seemed to ultimately stem from Packet Tracer limitations. Based off of this conclusion, I decided to skip further troubleshooting and work on the next section.
 
+## VTY ACL Configuration
 
+It's important to lockdown access to Network Devices to prevent giving an attacker an easy access point. To do this, we will create a Management ACL (MGMT-ACL) that only allows access to the VTY lines from **devices in VLAN 90**. First, we must configure **Management Interfaces** on the Access Switches. The below commands show this process being executed on ASW1-A.
+```
+interface vlan 90
+ip address 10.1.90.20 255.255.255.224
+!
+exit
+ip default-gateway 10.1.90.1
+```
+
+Now that every device is reachable via an IP address, we can configure the ACL. A standard ACL will be more than enough, as we want to restrict **all access** to the Network Devices, not just for certain ports. The below command shows the ACL being created on R1-A and then applied to the VTY lines.
+```
+ip access-list standard MGMT-ACL
+permit 10.1.90.0 0.0.0.31
+!
+exit
+line vty 0 15
+access-class MGMT-ACL in
+```
+Now that the ACL has been applied to all Network Devices, we can move on to **Validation and Testing**.
 
 
 
