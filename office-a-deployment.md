@@ -296,7 +296,7 @@ During testing, Packet Tracer exhibited unstable behavior when adding Wireless N
 
 ## VTY ACL Configuration
 
-It's important to lockdown access to Network Devices to prevent giving an attacker an easy access point. To do this, we will create a Management ACL (MGMT-ACL) that only allows access to the VTY lines from **devices in VLAN 90**. First, we must configure **Management Interfaces** on the Access Switches. The below commands show this process being executed on ASW1-A.
+It's important to lockdown access to Network Devices to prevent giving an attacker an easy access point. To do this, we will create a Management ACL (MGMT-ACL) that only allows access to the VTY lines from **devices in VLAN 90**. First, we must configure **Management Interfaces** on the Access Switches, as they are Layer 2 devices not currently reachable via IP. The below commands show this process being executed on ASW1-A.
 ```
 interface vlan 90
 ip address 10.1.90.20 255.255.255.224
