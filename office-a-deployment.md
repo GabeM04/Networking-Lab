@@ -305,7 +305,7 @@ exit
 ip default-gateway 10.1.90.1
 ```
 
-Now that every device is reachable via an IP address, we can configure the ACL. A standard ACL will be more than enough, as we want to restrict **all access** to the Network Devices, not just for certain ports. The below command shows the ACL being created on R1-A and then applied to the VTY lines.
+Now that every device is reachable via an IP address, we can configure the ACL. I made the decision to use a **Standard ACL** as we will be restricting Remote Management traffic solely based on Source IP Address. The below command shows the ACL being created on R1-A and then applied to the VTY lines.
 ```
 ip access-list standard MGMT-ACL
 permit 10.1.90.0 0.0.0.31
