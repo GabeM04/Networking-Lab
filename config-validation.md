@@ -8,3 +8,21 @@ I then connected a laptop to ASW1-A on a VLAN 90 Access Port. I manually assigne
 <img width="700" height="450" alt="image" src="https://github.com/user-attachments/assets/04675801-6d29-4c3b-94ca-fd661c1cd243" />
 
 * These two tests **confirm that the MGMT-ACL is working as intended**.
+
+## Config Validation (2 - HSRP)
+
+Next, I want to confirm that HSRP is functioning properly and providing VLAN Default Gateway Redundancy. First, I confirmed that CSW1-A is the **Active** router for VLAN 10.
+
+<img width="542" height="131" alt="image" src="https://github.com/user-attachments/assets/38ba41cb-a578-47fd-a91b-55c69add2d79" />
+
+Next, I accessed PC4's terminal, which has the HSRP 10.10.10.1 gateway as its Default Gateway. I ran the command ```tracert 1.1.1.1``` to confirm the device's path to R1-A.
+
+<img width="388" height="137" alt="image" src="https://github.com/user-attachments/assets/fd1baf85-e44c-436b-8ed9-195297ac869c" />
+
+* As shown in the above command, the ICMP packet first hits 10.10.10.2 (CSW2-A) before reaching 1.1.1.1. This confirms CSW1-A is currently functioning as the default gateway for VLAN 10.
+
+After confirming this behavior, I brought CSW1-A offline via toggling the power switch in Packet Tracer. Afterwards, I ran the command ```tracert 1.1.1.1``` again and confirmed that the ICMP packet first hit 10.10.10.3 (CSW2-A).
+
+<img width="375" height="136" alt="image" src="https://github.com/user-attachments/assets/0090d18a-cdd4-49fa-ab0e-ddc1123e6f7f" />
+
+This confirms that HSRP is working properly and the VLANs are not being routed through a single point of failure, which drastically improves network resilience and availability.
