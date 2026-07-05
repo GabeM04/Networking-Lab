@@ -15,12 +15,18 @@ Note: The scope of this lab originally included a second office, Office B. This 
 * OSPF
 * DHCP
 
+## Sections
+
+[Initial Network Design](office-a-design.md)
+[Network Deployment Into Packet Tracer](office-a-deployment.md)
+[Config Validation and Testing](config-validation.md)
+
 ## Status
 
 
 ### ✅ Completed
-- Office A network architecture diagram created [View Diagram](office-a-design.md)
-- Initial Office A topology deployed in Packet Tracer [View Deployment](office-a-deployment.md)
+- Office A network architecture diagram created 
+- Initial Office A topology deployed in Packet Tracer
 - Office A Device hardening baseline configured (SSH, local users, security settings)
 - VLAN Creation
 - Access port assignment and trunking
