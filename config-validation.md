@@ -66,7 +66,7 @@ I set the new PC to acquire its IP address via DHCP to force it to send packets 
 
 <img width="923" height="188" alt="image" src="https://github.com/user-attachments/assets/94044c05-5598-405b-9f82-6f259ab1257b" />
 
-* The above image shows a **port-security violation** occuring on F0/2. Due to the violation mode being set to **Restrict**, the port is not err-disabled but instead discards the violating MAC Address, preventing it from accessing the LAN. I then connected to PC7's terminal and confirmed it was unable to access LAN resources by attempting to ping 1.1.1.1.
+* The above image shows a **port-security violation** occuring on F0/2. Due to the violation mode being set to **Restrict**, the port is not err-disabled but instead drops traffic from the violating MAC Address, preventing it from accessing the LAN while still servicing approved MACs. I then connected to PC7's terminal and confirmed it was unable to access LAN resources by attempting to ping 1.1.1.1.
 
 <img width="392" height="187" alt="image" src="https://github.com/user-attachments/assets/2b648e4f-5582-4d24-b505-b49338bce159" />
 
