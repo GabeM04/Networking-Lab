@@ -225,7 +225,7 @@ no passive-interface g0/2
 Since the entire Office falls within the 10.1.0.0/16 network and all VLANs should have routes to each other, I decided to advertise the 10.1.0.0/16 network on all OSPF instances. More granular access controls restricting certain devices or networks can be done with the implementation of ACLs further into the deployment. Below is an example of 10.1.0.0/16 being advertised on R1-A.
 ```
 router ospf 1
-network 10.1.0.0 0.0.255.255
+network 10.1.0.0 0.0.255.255 area 0
 ```
 I also realized that since these are all point-to-point links between the Layer 3 devices, it would be best to enable ospf point-to-point. This allows for much faster convergence as OSPF will only expect a response from one other device. This command has to be done in Interface Config, per interface. Below is an example of making the link between R1-A and the other Layer 3 network devices an ospf point-to-point network.
 ```
