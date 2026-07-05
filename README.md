@@ -18,7 +18,9 @@ Note: The scope of this lab originally included a second office, Office B. This 
 ## Sections
 
 [Initial Network Design](office-a-design.md)
+
 [Network Deployment Into Packet Tracer](office-a-deployment.md)
+
 [Config Validation and Testing](config-validation.md)
 
 ## Status
