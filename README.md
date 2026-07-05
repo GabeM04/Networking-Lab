@@ -28,14 +28,10 @@ This project demonstrates a collapsed-core network architecture connecting a com
 - Wireless deployment (WLC + AP provisioning)
 
 ### 🟡 In Progress
-- Management ACLs on VTY lines
-
-### ⏳ Planned
 - Failover testing and validation
 
-### 🔜 Future Enhancements
-- Office B network design and deployment
-- Inter-office connectivity (simulated IPsec tunnel due to Packet Tracer constraints)
+### ⏳ Planned
+
 
 
 
