@@ -74,7 +74,7 @@ This confirms that Port-Security is functioning properly and preventing unexpect
 
 ## Config Validation (6 - OSPF)
 
-For our final validation, we want to ensure that OSPF reconverges successfully after links fail. While in this lab environment, OSPF failing would cause minimal issues, in a more complex environment the routing protocol can prevent an entire network from becoming unreachable. To test, I first confirmed CSW2-A's route to 1.1.1.1 (R1-A) using ```show ip route 1.1.1.1```.
+For our final validation, we want to ensure that OSPF reconverges successfully after links fail. While in this lab environment, OSPF failing would cause minimal issues, in a more complex environment the routing protocol can prevent an entire network from becoming unreachable. To test, I first confirmed CSW2-A's route to 1.1.1.1 (R1-A Loppback) using ```show ip route 1.1.1.1```.
 
 <img width="502" height="107" alt="image" src="https://github.com/user-attachments/assets/829e3b45-d046-40c7-874a-8316d4cb0e6a" />
 
@@ -85,6 +85,8 @@ I then connected to R1-A and brought down the G0/1 Interface which is connected 
 <img width="938" height="127" alt="image" src="https://github.com/user-attachments/assets/4a310967-5d28-488c-a7bc-876d0e413cbc" />
 
 * This output confirms the address 1.1.1.1 can still be reached even though the directly connected link to R1-A is down. The path now goes through R2-A (G1/0/2).
+
+This validation test confirms that even during link failure, network device availability is maintained through automatic dynamic routing convergence and link redundancy, reducing administrative overhead and ensuring high availability.
 
 
 
