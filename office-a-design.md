@@ -32,6 +32,8 @@ I’ve also added a Wireless LAN Controller (WLC) trunked to one of the Collapse
 
 Finally, it’s important to determine how IPs will be provided in the network. While the routers/Core Switches can operate as a DHCP server, this is not best practice and will confuse roles. Instead, DHCP will be configured on the Domain Controller (DC). VLAN Default Gateways will be configured to relay DHCP requests to the DC, allowing automatic IP provisioning while keeping the DHCP Server Role off of the main network devices.
 
+* **Note** - During the deployment, I determined that Packet Tracer Servers do not seem to support a dual-NIC setup, so this was ommitted from the lab.
+
 ## HSRP/STP Alignment
 
 | VLAN | HSRP/STP Active/Root | HSRP Standby/Secondary |
