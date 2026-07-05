@@ -2,7 +2,9 @@
 
 ## Overview
 
-This project demonstrates a collapsed-core network architecture connecting a company's main office and branch office, with each office supporting ~100 users and being connected via an IPsec tunnel. The lab focuses on designing a network architecture from the ground-up, covering topics from initial device hardening to inter-office routing and network resilience.
+This project demonstrates a collapsed-core network architecture in a medium-sized enterprise office environment. The lab focuses on designing a network architecture from the ground-up, covering topics from initial device hardening to inter-office routing and network resilience.
+
+Note: The scope of this lab originally included a second office, Office B. This was meant to display IPsec Tunnel configurations. Due to Packet Tracer having limited support for this feature, I decided to focus on creating a resilient single office network instead and explore IPsec in a separate lab.
 
 ## Focus Topics
 * Network Engineering and Deployment
