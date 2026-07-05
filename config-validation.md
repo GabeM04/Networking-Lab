@@ -55,3 +55,20 @@ I then brought the interface online and confirmed that the port was instantly pl
 <img width="907" height="290" alt="image" src="https://github.com/user-attachments/assets/0b577050-041a-49e1-963e-9425356b1a67" />
 
 <img width="569" height="97" alt="image" src="https://github.com/user-attachments/assets/deac04e4-fb34-42a4-8c1b-7f803784ca14" />
+
+## Config Validation (5 - Port Security)
+
+To test Poret Security functionality, I decided to force the F0/2 Interface on ASW1-A (Connected to IP Phone0 and PC0) to learn a third MAC Address, despite it's **port-security maximum being set to 2**. I did this by connecting a Hub to the Interface, and then a second PC to the Hub.
+
+<img width="453" height="568" alt="image" src="https://github.com/user-attachments/assets/382cf2ca-c316-4e03-88ef-61969d7a822d" />
+
+I set the new PC to acquire its IP address via DHCP to force it to send packets through ASW1-A. I then observed ASW1-A's SYSLOG behavior.
+
+<img width="923" height="188" alt="image" src="https://github.com/user-attachments/assets/94044c05-5598-405b-9f82-6f259ab1257b" />
+
+* The above image shows a **port-security violation** occuring on F0/2. Due to the violation mode being set to **Restrict**, the port is not err-disabled but instead discards the violating MAC Address, preventing it from accessing the LAN. I then connected to PC7's terminal and confirmed it was unable to access LAN resources by attempting to ping 1.1.1.1.
+
+<img width="392" height="187" alt="image" src="https://github.com/user-attachments/assets/2b648e4f-5582-4d24-b505-b49338bce159" />
+
+This confirms that Port-Security is functioning properly and preventing unexpected quantities of devices from accessing a certain port.
+
