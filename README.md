@@ -8,12 +8,12 @@ Note: The scope of this lab originally included a second office, Office B. This 
 
 ## Focus Topics
 * Network Engineering and Deployment
-* Network Device Hardening
+* Network Security
 * HSRP
 * EtherChannel
 * Spanning Tree
 * OSPF
-* Port Security
+* DHCP
 
 ## Status
 
@@ -27,7 +27,7 @@ Note: The scope of this lab originally included a second office, Office B. This 
 - Spanning Tree configuration and Layer 2 HSRP
 - OSPF routing between core and routers
 - DHCP implementation (via Domain Controller + Relay)
-- Wireless deployment (WLC + AP provisioning)
+- WLAN Deployment
 
 ### 🟡 In Progress
 - Failover testing and validation
