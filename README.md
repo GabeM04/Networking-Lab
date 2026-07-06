@@ -36,6 +36,7 @@ Note: The scope of this lab originally included a second office, Office B. This 
 - OSPF routing between core and routers
 - DHCP implementation (via Domain Controller + Relay)
 - WLAN Deployment
+- Management VLAN ACL
 - Failover testing and validation
 
 ## Lessons Learned
