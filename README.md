@@ -43,7 +43,7 @@ Note: The scope of this lab originally included a second office, Office B. This 
 
 This project was extremely exciting and was a first for me. While I have done individual smaller labs with each of these topics, this is the first time I have architected an entire network from the ground-up. Due to this being a new experience, there were several lessons I've learned and am excited to add to my networking knowledge.
 
-* It's very important to ensure subnets have a clear purpose and roles aren't being mixed up. This allows for easier route summarization and understanding of an IP Address's role in the network without having to reference documentation every single time.
+* It's crucial to ensure subnets have a clear purpose and roles aren't being mixed up. This allows for easier route summarization and understanding of an IP Address's role in the network without having to reference documentation every single time.
 * While OSPF is extremely beneficial in very large network topologies, it can still serve a strong purpose in a smaller environment by ensuring high availability and link redundancy.
 * When creating DHCP Pools, it's best to ensure what static IP addresses are required first. For example, if the VLAN is using an HSRP Default Gateway, three IPs are automatically not useable. This must be taken into account to avoid DHCP providing end devices with duplicate IP addresses.
 * While VTP is very efficient for quickly distributing VLANs across Network Devices, it creates a single point of failure. If anything happens to the VTP Server or if a newly introduced device is accidentally elected the VTP Server, the entire LAN's VLAN database could be wiped.
