@@ -19,7 +19,7 @@ Next, I accessed PC4's terminal, which has the HSRP 10.10.10.1 gateway as its De
 
 <img width="388" height="137" alt="image" src="https://github.com/user-attachments/assets/fd1baf85-e44c-436b-8ed9-195297ac869c" />
 
-* As shown in the above command, the ICMP packet first hits 10.10.10.2 (CSW2-A) before reaching 1.1.1.1. This confirms CSW1-A is currently functioning as the default gateway for VLAN 10.
+* As shown in the above command, the ICMP packet first hits 10.10.10.2 (CSW1-A) before reaching 1.1.1.1. This confirms CSW1-A is currently functioning as the default gateway for VLAN 10.
 
 After confirming this behavior, I brought CSW1-A offline via toggling the power switch in Packet Tracer. Afterwards, I ran the command ```tracert 1.1.1.1``` again and confirmed that the ICMP packet first hit 10.10.10.3 (CSW2-A).
 
